@@ -13,24 +13,24 @@ class Screen:
     def draw(self):
         self.surface.fill("black")
         [
-            self.surface.blit(self.wall_sprite, pg.rect.Rect(x, 0, Constant.TILE_SIZE, Constant.TILE_SIZE))
+            self.surface.blit(self.wall_sprite, pg.Rect(x, 0, Constant.TILE_SIZE, Constant.TILE_SIZE))
             for x in range(0, Constant.WINDOW_SIZE, Constant.TILE_SIZE)
         ]
         [
             self.surface.blit(
                 self.wall_sprite,
-                pg.rect.Rect(x, Constant.WINDOW_SIZE - Constant.TILE_SIZE, Constant.TILE_SIZE, Constant.TILE_SIZE),
+                pg.Rect(x, Constant.WINDOW_SIZE - Constant.TILE_SIZE, Constant.TILE_SIZE, Constant.TILE_SIZE),
             )
             for x in range(0, Constant.WINDOW_SIZE, Constant.TILE_SIZE)
         ]
         [
-            self.surface.blit(self.wall_sprite, pg.rect.Rect(0, y, Constant.TILE_SIZE, Constant.TILE_SIZE))
+            self.surface.blit(self.wall_sprite, pg.Rect(0, y, Constant.TILE_SIZE, Constant.TILE_SIZE))
             for y in range(0, Constant.WINDOW_SIZE, Constant.TILE_SIZE)
         ]
         [
             self.surface.blit(
                 self.wall_sprite,
-                pg.rect.Rect(Constant.WINDOW_SIZE - Constant.TILE_SIZE, y, Constant.TILE_SIZE, Constant.TILE_SIZE),
+                pg.Rect(Constant.WINDOW_SIZE - Constant.TILE_SIZE, y, Constant.TILE_SIZE, Constant.TILE_SIZE),
             )
             for y in range(0, Constant.WINDOW_SIZE, Constant.TILE_SIZE)
         ]

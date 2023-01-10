@@ -12,6 +12,7 @@ class Snake:
         self.length = 1
         self.direction = (0, 0)
         self.segments = [self.head_location.copy()]
+        self.wasted = False
 
         self.sprites = {
             sprite: pg.transform.scale(pg.image.load(f"sprites/{sprite}.png"), (Constant.TILE_SIZE, Constant.TILE_SIZE))
@@ -19,6 +20,7 @@ class Snake:
         }
         self.rendered_sprites = {sprite: self.sprites[sprite].copy() for sprite in ["head", "tail", "body", "curve"]}
 
+    # TODO: refactor this shit
     def draw(self):
         def blit(sprite: str, segment: pg.rect.Rect, angle: int = 0):
             self.screen.surface.blit(pg.transform.rotate(self.sprites[sprite], angle), segment)
@@ -26,13 +28,13 @@ class Snake:
         for i, segment in enumerate(self.segments[::-1]):
             if i == 0:
                 angle = 0
-                if self.direction[0] > 0:  # right
+                if self.direction[0] > 0:
                     angle = 180
-                elif self.direction[0] < 0:  # left
+                elif self.direction[0] < 0:
                     angle = 0
-                elif self.direction[1] > 0:  # down
+                elif self.direction[1] > 0:
                     angle = 90
-                elif self.direction[1] < 0:  # up
+                elif self.direction[1] < 0:
                     angle = -90
                 blit("head", segment, angle)
             elif i == len(self.segments) - 1:
@@ -89,8 +91,13 @@ class Snake:
                 blit(sprite, segment, angle)
 
     def move(self):
+        prev_state = (self.head_location.copy(), self.segments)
         self.head_location.move_ip(self.direction)
         self.segments = (self.segments + [self.head_location.copy()])[-self.length :]
+
+        if self.has_colided():
+            self.wasted = True
+            self.head_location, self.segments = prev_state
 
     def eat(self):
         self.length += 1
