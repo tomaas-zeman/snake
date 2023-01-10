@@ -7,11 +7,12 @@ from src.screen import Screen
 class Food:
     def __init__(self, screen: Screen):
         self.screen = screen
-        self.point = pg.rect.Rect(0, 0, Constant.TILE_SIZE, Constant.TILE_SIZE)
-        self.point.center = get_random_position()
+        self.sprite = pg.transform.scale(pg.image.load(f"sprites/food.png"), (Constant.TILE_SIZE, Constant.TILE_SIZE))
+        self.location = pg.rect.Rect(0, 0, Constant.TILE_SIZE, Constant.TILE_SIZE)
+        self.location.center = get_random_position()
 
     def draw(self):
-        pg.draw.rect(self.screen.surface, "green", self.point)
+        self.screen.surface.blit(self.sprite, self.location)
 
     def reset(self):
         self.__init__(self.screen)

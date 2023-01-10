@@ -28,7 +28,7 @@ while True:
     if timer.ready_to_render():
         snake.move()
 
-        if snake.head.colliderect(food.point):
+        if snake.head_location.colliderect(food.location):
             snake.eat()
             food.reset()
 
