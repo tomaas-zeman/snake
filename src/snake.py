@@ -18,11 +18,10 @@ class Snake:
             sprite: pg.transform.scale(pg.image.load(f"sprites/{sprite}.png"), (Constant.TILE_SIZE, Constant.TILE_SIZE))
             for sprite in ["head", "tail", "body", "curve"]
         }
-        self.rendered_sprites = {sprite: self.sprites[sprite].copy() for sprite in ["head", "tail", "body", "curve"]}
 
     # TODO: refactor this shit
     def draw(self):
-        def blit(sprite: str, segment: pg.rect.Rect, angle: int = 0):
+        def blit(sprite: str, segment: pg.rect.Rect, angle: int):
             self.screen.surface.blit(pg.transform.rotate(self.sprites[sprite], angle), segment)
 
         for i, segment in enumerate(self.segments[::-1]):
