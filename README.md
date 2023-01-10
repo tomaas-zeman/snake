@@ -1,2 +1,2 @@
 # Snake
-Just a simple POC of what the pygame library can do
+Just a simple game to try development with the pygame library
